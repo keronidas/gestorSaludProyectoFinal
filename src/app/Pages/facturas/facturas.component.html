@@ -1,1 +1,68 @@
-<p>facturas works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8 text-center mt-3">
+            <h1>Facturas</h1>
+        </div>
+        <div class="col">
+            <button class=" mi-btn rojo-marron mb-2 container-fluid">Agregar factura</button>
+            <input type="text" class="form-control" placeholder="Buscar factura">
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid mt-3">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">CSV</th>
+                <th scope="col">Fecha de Creacion</th>
+                <th scope="col">Fecha de Facturacion</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Descuento General</th>
+                <th scope="col">Importe</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(item of currentPageItems; track item){
+            <tr>
+                <td>{{item.nombre}}</td>
+                <td>{{item.codigoVerificacion}}</td>
+                <td>{{item.fechaCreacion}}</td>
+                <td>{{item.fechaFacturacion}}</td>
+
+                @if(item.estado==="Pendiente"){
+                <td [ngStyle]="{'color':'red'}">
+                    {{item.estado}}</td>
+                }
+                @else{
+                <td>
+                    {{item.estado}}</td>
+                }
+                <td>{{item.descuento_general}}</td>
+                <td>{{item.importe}}</td>
+
+            </tr>}
+
+            <!-- Puedes agregar más filas según sea necesario -->
+        </tbody>
+    </table>
+</div>
+
+@if(itemsPerPage/items.length < 1){ <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        @for (page of totalPages;track page){
+        <li class="page-item">
+            <a class="page-link" (click)="setCurrentPage(page)">{{ page }}</a>
+        </li>
+        }
+    </ul>
+    </nav>
+    }

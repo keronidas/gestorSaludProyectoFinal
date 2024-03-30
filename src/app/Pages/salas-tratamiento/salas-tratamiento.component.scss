@@ -1,0 +1,26 @@
+.card {
+    transition: transform 0.2s ease;
+    /* Transición suave */
+}
+
+.card:hover {
+    transform: scale(1.05);
+    /* Aplica un ligero zoom in al pasar el cursor sobre la tarjeta */
+}
+
+.card img {
+    max-width: 100%;
+    /* Ajusta el ancho máximo de las imágenes para que no se salgan del contenedor */
+    max-height: 450px;
+    /* Establece una altura máxima para las imágenes */
+    width: 450px;
+    /* Ancho deseado */
+    height: 250px;
+    /* Alto deseado */
+    object-fit: cover;
+    /* Esto asegura que las imágenes conserven su relación de aspecto y se recorten si es necesario para ajustarse al contenedor */
+    display: block;
+    /* Asegura que la imagen esté centrada horizontalmente */
+    margin: 0 auto;
+    /* Centra la imagen horizontalmente dentro del contenedor */
+}

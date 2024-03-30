@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './Pages/layout/layout.component';
 import { AuthLayoutComponent } from './Pages/auth-layout/auth-layout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginPageComponent } from './Pages/login-page/login-page.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +30,16 @@ import { FacturasComponent } from './Pages/facturas/facturas.component';
 import { ConfiguracionComponent } from './Pages/configuracion/configuracion.component';
 import { CalendarioComponent } from './Pages/calendario/calendario.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { CommonModule } from '@angular/common';
+import { PacientesComponent } from './Pages/pacientes/pacientes.component';
+import { NewPacienteComponent } from './Components/new-paciente/new-paciente.component';
+import { NewMaterialComponent } from './Components/new-material/new-material.component';
+import { NewProfesionalComponent } from './Components/new-profesional/new-profesional.component';
+import { NewSalaTratamientoComponent } from './Components/new-sala-tratamiento/new-sala-tratamiento.component';
+import { NewFacturaComponent } from './Components/new-factura/new-factura.component';
+import { NewSesionComponent } from './Components/new-sesion/new-sesion.component';
+
+
 
 @NgModule({
   declarations: [
@@ -42,6 +52,13 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
     ConfiguracionComponent,
     CalendarioComponent,
     DashboardComponent,
+    PacientesComponent,
+    NewPacienteComponent,
+    NewMaterialComponent,
+    NewProfesionalComponent,
+    NewSalaTratamientoComponent,
+    NewFacturaComponent,
+    NewSesionComponent
 
   ],
   imports: [
@@ -65,6 +82,8 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
     MatSidenavModule,
     MatSnackBarModule,
     MatToolbarModule,
+    CommonModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()
