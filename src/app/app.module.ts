@@ -25,13 +25,22 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MaterialComponent } from './Pages/material/material.component';
+import { FacturasComponent } from './Pages/facturas/facturas.component';
+import { ConfiguracionComponent } from './Pages/configuracion/configuracion.component';
+import { CalendarioComponent } from './Pages/calendario/calendario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     AuthLayoutComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    MaterialComponent,
+    FacturasComponent,
+    ConfiguracionComponent,
+    CalendarioComponent,
+
   ],
   imports: [
     BrowserModule,
