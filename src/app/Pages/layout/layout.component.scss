@@ -1,0 +1,46 @@
+.azul-claro {
+    background-color: #44d4e0;
+    color: black;
+}
+
+.azul-oscuro {
+    background-color: #2f364f;
+    color: white;
+}
+
+.mi-btn-circular {
+    margin: 10px 20px;
+    width: 64px;
+    /* Ajusta el tamaño del botón según sea necesario */
+    height: 64px;
+    border-radius: 50%;
+    /* Hace que el botón sea circular */
+    overflow: hidden;
+    /* Oculta cualquier contenido que se salga del área circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 2px solid #44d4e0;
+    /* Cambia el color del borde según desees */
+    cursor: pointer;
+    padding: 0;
+
+    img {
+        width: 100%;
+        /* Ajusta el tamaño de la imagen para que ocupe todo el espacio del botón */
+        height: auto;
+        /* La altura se ajustará automáticamente */
+        border-radius: 50%;
+        /* Hace que la imagen sea circular */
+        transition: transform 0.2s ease;
+        /* Agrega una transición suave al cambiar el tamaño de la imagen */
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.1);
+            /* Hace que la imagen se agrande ligeramente al pasar el cursor sobre el botón */
+        }
+    }
+}

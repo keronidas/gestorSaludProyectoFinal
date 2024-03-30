@@ -10,6 +10,7 @@ import { MaterialComponent } from './Pages/material/material.component';
 import { FacturasComponent } from './Pages/facturas/facturas.component';
 import { ConfiguracionComponent } from './Pages/configuracion/configuracion.component';
 import { CalendarioComponent } from './Pages/calendario/calendario.component';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [],
     children: [
+      { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' },
       { path: 'pacientes', component: PacientesComponent, pathMatch: 'full' },
       { path: 'profesionales', component: ProfesionalesComponent, pathMatch: 'full' },
       { path: 'salas-tratamiento', component: SalasTratamientoComponent, pathMatch: 'full' },
@@ -33,7 +35,7 @@ const routes: Routes = [
       { path: 'material', component: MaterialComponent, pathMatch: 'full' },
       { path: 'facturas', component: FacturasComponent, pathMatch: 'full' },
       { path: 'configuracion', component: ConfiguracionComponent, pathMatch: 'full' },
-      { path: '**', redirectTo: 'pacientes' }
+      { path: '**', redirectTo: 'dashboard' }
     ]
   },
   {

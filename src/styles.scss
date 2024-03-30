@@ -1,3 +1,47 @@
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.azul-oscuro {
+    background-color: #2f364f;
+    color: white;
+}
+
+.rojo-marron {
+    background-color: #a05f60;
+    color: white;
+}
+
+.verde {
+    background-color: #7abd7b;
+    color: black;
+}
+
+.amarillo {
+    background-color: #ffd70f;
+    color: black;
+}
+
+.azul-claro {
+    background-color: #44d4e0;
+    color: black;
+}
+
+
+
+.mi-btn {
+    padding: 10px 20px;
+    border: 1px solid black;
+    transition: border 1s ease;
+    font-weight: bold;
+
+    &:hover {
+        border-radius: 20px;
+    }
+}

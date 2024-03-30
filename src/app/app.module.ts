@@ -29,6 +29,7 @@ import { MaterialComponent } from './Pages/material/material.component';
 import { FacturasComponent } from './Pages/facturas/facturas.component';
 import { ConfiguracionComponent } from './Pages/configuracion/configuracion.component';
 import { CalendarioComponent } from './Pages/calendario/calendario.component';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CalendarioComponent } from './Pages/calendario/calendario.component';
     FacturasComponent,
     ConfiguracionComponent,
     CalendarioComponent,
+    DashboardComponent,
 
   ],
   imports: [

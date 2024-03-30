@@ -1,7 +1,7 @@
 <mat-sidenav-container fullscreen>
 
     <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px' }">
-        <mat-toolbar color="accent">
+        <mat-toolbar class="azul-claro">
             <span>Menú</span>
             <span class="spacer"></span>
             <button mat-icon-button (click)="sidenav.toggle()">
@@ -20,15 +20,18 @@
     </mat-sidenav>
 
 
-    <mat-toolbar color="primary">
+    <mat-toolbar class="azul-oscuro">
         <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
 
         <span class="spacer"></span>
 
-        <button mat-button>
-            Logout
+        <button mat-button class="">
+            <span class="azul-oscuro">Logout</span>
+        </button>
+        <button mat-button class="mi-btn-circular">
+            <img src="../../../assets/img/persona1.jpeg" alt="yo">
         </button>
 
     </mat-toolbar>
