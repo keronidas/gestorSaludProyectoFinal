@@ -14,7 +14,6 @@
         </div>
     </div>
 </div>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -27,8 +26,10 @@
             <h1>Pacientes</h1>
         </div>
         <div class="col">
-            <button class="mi-btn rojo-marron mb-2 container-fluid">Agregar Paciente</button>
-            <button class="mi-btn rojo-marron mb-2 container-fluid">Agendar Cita</button>
+            <button class="mi-btn rojo-marron mb-2 container-fluid" routerLink="/pacientes/nuevo-paciente">Agregar
+                Paciente</button>
+            <button class="mi-btn rojo-marron mb-2 container-fluid" routerLink="/pacientes/nueva-cita">Agendar
+                Cita</button>
             <input type="text" class="form-control" placeholder="Buscar paciente">
         </div>
     </div>
@@ -46,6 +47,7 @@
                 <th scope="col">Fecha de Nacimiento</th>
                 <th scope="col">Ciudad</th>
                 <th scope="col">Número</th>
+                <th scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -57,6 +59,10 @@
                 <td>{{ item.birthdate }}</td>
                 <td>{{ item.city }}</td>
                 <td>{{ item.number }}</td>
+                <td><a class="enlace-lapiz" [routerLink]="['/pacientes/editar-paciente/', item.id]"><mat-icon
+                            matListItemIcon>edit</mat-icon></a>
+                    <button class="btn-basura"><mat-icon matListItemIcon>delete</mat-icon></button>
+                </td>
                 <!-- Agrega más columnas según tus necesidades -->
             </tr>
             }

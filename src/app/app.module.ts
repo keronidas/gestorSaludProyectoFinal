@@ -38,6 +38,7 @@ import { NewProfesionalComponent } from './Components/new-profesional/new-profes
 import { NewSalaTratamientoComponent } from './Components/new-sala-tratamiento/new-sala-tratamiento.component';
 import { NewFacturaComponent } from './Components/new-factura/new-factura.component';
 import { NewSesionComponent } from './Components/new-sesion/new-sesion.component';
+import { FacturaViewComponent } from './Pages/factura-view/factura-view.component';
 
 
 
@@ -58,7 +59,8 @@ import { NewSesionComponent } from './Components/new-sesion/new-sesion.component
     NewProfesionalComponent,
     NewSalaTratamientoComponent,
     NewFacturaComponent,
-    NewSesionComponent
+    NewSesionComponent,
+    FacturaViewComponent
 
   ],
   imports: [

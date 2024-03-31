@@ -12,6 +12,7 @@ export class MaterialComponent {
   constructor() {
     for (let i = 1; i <= 1000; i++) {
       this.items.push({
+        id: i,
         nombre: `Item ${i}`,
         precio: Math.random() * 1000, // Precio aleatorio entre 0 y 1000
         fechaCompra: '2023-01-01', // Fecha de compra fija para todos los elementos

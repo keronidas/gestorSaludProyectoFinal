@@ -11,6 +11,7 @@ export class FacturasComponent {
   constructor() {
     for (let i = 1; i <= 1000; i++) {
       this.items.push({
+        id: i,
         nombre: `Item ${i}`,
         codigoVerificacion: Math.random().toString(36).substring(7), // Código aleatorio de 7 caracteres
         fechaCreacion: new Date().toDateString(), // Fecha de creación actual,

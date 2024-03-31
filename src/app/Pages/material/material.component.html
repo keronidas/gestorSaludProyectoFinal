@@ -10,7 +10,8 @@
             <h1>Material</h1>
         </div>
         <div class="col">
-            <button class=" mi-btn rojo-marron mb-2 container-fluid">Agregar Material</button>
+            <button class=" mi-btn rojo-marron mb-2 container-fluid" routerLink="/material/nuevo-material">Agregar
+                Material</button>
             <input type="text" class="form-control" placeholder="Buscar material">
         </div>
     </div>
@@ -26,6 +27,7 @@
                 <th scope="col">Fecha de Compra</th>
                 <th scope="col">Nombre Proveedor</th>
                 <th scope="col">Cantidad en Stock</th>
+                <th scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -36,7 +38,11 @@
                 <td>{{item.fechaCompra}}</td>
                 <td>{{item.nombreProveedor}}</td>
                 <td>{{item.cantidadEnStock}}</td>
-                
+                <td><a class="enlace-lapiz" [routerLink]="['/material/editar-material/', item.id]"><mat-icon
+                            matListItemIcon>edit</mat-icon></a>
+                    <button class="btn-basura"><mat-icon matListItemIcon>delete</mat-icon></button>
+                </td>
+
             </tr>}
 
             <!-- Puedes agregar más filas según sea necesario -->

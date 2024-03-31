@@ -1,1 +1,107 @@
-<p>configuracion works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <select class="form-select" name="seleccion" id="seleccion" (change)="cambiarValorSeleccion()">
+                <option>--------</option>
+                @for(item of items;track item){
+                <option [value]=item.nombreCompleto>{{item.nombreCompleto}}</option>}
+            </select>
+        </div>
+    </div>
+
+    @if(personaElegida){
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="edita_historia_clinica"
+                    [checked]="edita_historia_clinica">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Edita Historia Clínica?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="edita_clientes">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Edita Clientes?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="edita_profesionales">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Edita Profesionales?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="edita_usuarios">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Edita Usuarios?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="edita_material">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Edita Material?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="edita_facturas">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Edita Facturas?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="edita_oficios">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Edita Oficios?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="visualiza_historia_clinica">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Visualiza Historia Clínica?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="visualiza_clientes">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Visualiza Clientes?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="visualiza_profesionales">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Visualiza Profesionales?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="visualiza_usuarios">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Visualiza Usuarios?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="visualiza_material">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Visualiza Material?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="visualiza_facturas">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Visualiza Facturas?</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input class="styled-checkbox" type="checkbox" [(ngModel)]="visualiza_oficios">
+                <span class="checkbox-custom"></span>
+                <label class="form-check-label">¿Visualiza Oficios?</label>
+            </div>
+
+            <!-- Agrega más campos de checkbox según sea necesario -->
+
+        </div>
+    </div>
+
+
+    }
+</div>
