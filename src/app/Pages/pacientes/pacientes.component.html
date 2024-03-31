@@ -26,15 +26,88 @@
             <h1>Pacientes</h1>
         </div>
         <div class="col">
-            <button class="mi-btn rojo-marron mb-2 container-fluid" routerLink="/pacientes/nuevo-paciente">Agregar
+            <button class="mi-btn rojo-marron mb-2 container-fluid" (click)="fnCrearPaciente()">Agregar
                 Paciente</button>
-            <button class="mi-btn rojo-marron mb-2 container-fluid" routerLink="/pacientes/nueva-cita">Agendar
+            <button class="mi-btn rojo-marron mb-2 container-fluid" (click)="fnCrearSesion()">Agendar
                 Cita</button>
             <input type="text" class="form-control" placeholder="Buscar paciente">
         </div>
     </div>
 </div>
 
+
+@if(crearPaciente){
+<div class="fondo-formulario">
+    <div class="row formulario-oculto">
+        <form [formGroup]="formularioCliente" class="form">
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Nombre </mat-label>
+                    <input matInput type="text" formControlName="name" />
+                    @if(formularioCliente.controls.name.hasError('required')){
+                    <mat-error>Ingrese su nombre</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Email </mat-label>
+                    <input matInput type="text" formControlName="email" />
+                    @if(formularioCliente.controls.email.hasError('required')){
+                    <mat-error>Ingrese su email</mat-error>
+                    }
+                    @if(formularioCliente.controls.email.hasError('email')){
+                    <mat-error>Ingrese un formato correcto</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Fecha de Nacimiento </mat-label>
+                    <input matInput type="date" formControlName="birthdate" />
+                    @if(formularioCliente.controls.birthdate.hasError('required')){
+                    <mat-error>Ingrese su fecha de nacimiento</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Ciudad </mat-label>
+                    <input matInput type="text" formControlName="city" />
+                    @if(formularioCliente.controls.city.hasError('required')){
+                    <mat-error>Ingrese su ciudad</mat-error>
+                    }
+                    @if(formularioCliente.controls.city.hasError('minlength')){
+                    <mat-error>Ingrese un minimo de 3 caracteres</mat-error>
+                    }
+                    @if(formularioCliente.controls.city.hasError('maxlength')){
+                    <mat-error>Ingrese un maximo de 50 caracteres</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Numero contacto </mat-label>
+                    <input matInput type="text" formControlName="number" />
+                    @if(formularioCliente.controls.number.hasError('required')){
+                    <mat-error>Ingrese su numero de telefono</mat-error>
+                    }
+                    @if(formularioCliente.controls.number.hasError('pattern')){
+                    <mat-error>Ingrese un numero de telefono valido</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <button mat-raised-button (click)="fnPacienteCreado()">Crear</button>
+        </form>
+    </div>
+</div>
+}
+
+
+
+@if(crearSesion){
+
+}
 <!-- <p *ngFor="let item of items">{{item.id}}</p> -->
 
 <div class="container-fluid mt-3">
