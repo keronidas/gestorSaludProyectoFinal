@@ -69,6 +69,13 @@ export class PacientesComponent {
   }
   fnPacienteCreado(): void {
     this.crearPaciente = false;
+    if (this.formularioCliente.valid) {
+      this.servicio.addDatosImaginarios(this.formularioCliente.value);
+    }
+  }
+  fnPacienteCancelado(): void {
+    this.crearPaciente = false;
+    this.formularioCliente.reset();
   }
   fnCrearSesion(): void {
     this.crearSesion = true;

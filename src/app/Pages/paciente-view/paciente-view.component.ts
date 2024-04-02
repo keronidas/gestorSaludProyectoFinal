@@ -1,17 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PacientesService } from '../../Services/pacientes.service';
+import { SesionService } from '../../Services/sesion.service';
+import { FacturaService } from '../../Services/factura.service';
+
 
 @Component({
   selector: 'app-paciente-view',
   templateUrl: './paciente-view.component.html',
   styleUrl: './paciente-view.component.scss'
 })
-export class PacienteViewComponent  implements OnInit {
+export class PacienteViewComponent implements OnInit {
   id!: string;
+  paciente: any = {};
+  sesiones: any = [];
+  facturas: any = [];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private pacienteService: PacientesService, private sesionService: SesionService, private facturasService: FacturaService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
+    this.paciente = this.pacienteService.obtenerUsuarioById(parseInt(this.id));
+    this.sesiones = this.sesionService.obtenerSesionesByPacienteId(parseInt(this.id));
+    this.facturas = this.facturasService.obtenerFacturasByPacienteId(parseInt(this.id));
   }
 }

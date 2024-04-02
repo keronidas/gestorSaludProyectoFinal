@@ -39,6 +39,13 @@ import { NewSesionComponent } from './Components/new-sesion/new-sesion.component
 import { PacientesComponent } from './Pages/pacientes/pacientes.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterModule } from '@angular/router';
+import { PacienteViewComponent } from './Pages/paciente-view/paciente-view.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { FormatoFechaPipe } from './Pipes/formato-fecha.pipe';
+import {MatTableModule} from '@angular/material/table';
+
+
 
 
 
@@ -62,6 +69,9 @@ import { RouterModule } from '@angular/router';
     NewFacturaComponent,
     NewSesionComponent,
     FacturaViewComponent,
+    PacienteViewComponent,
+    FormatoFechaPipe
+
 
 
   ],
@@ -90,6 +100,11 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
+    MatCardModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatTableModule,
   ],
   providers: [
     provideAnimationsAsync()
