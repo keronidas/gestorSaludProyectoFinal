@@ -20,7 +20,7 @@ export class PacienteViewComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
-    this.paciente = this.pacienteService.obtenerUsuarioById(parseInt(this.id));
+    this.paciente = this.pacienteService.getPatientById((this.id));
     this.sesiones = this.sesionService.obtenerSesionesByPacienteId(parseInt(this.id));
     this.facturas = this.facturasService.obtenerFacturasByPacienteId(parseInt(this.id));
   }

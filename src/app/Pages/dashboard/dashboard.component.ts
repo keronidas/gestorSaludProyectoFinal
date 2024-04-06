@@ -8,11 +8,11 @@ import { SesionService } from '../../Services/sesion.service';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-  pacientesTratados: number;
+  // pacientesTratados: number;
   numeroSesiones: number;
   facturacion: number;
   constructor(private pacienteService: PacientesService, private sesionService: SesionService) {
-    this.pacientesTratados = this.pacienteService.getDatosImaginarios().length;
+    // this.pacientesTratados = this.pacienteService.getPatients();
     this.numeroSesiones = this.sesionService.getDatosImaginarios().length;
     this.facturacion = this.sesionService.getDatosImaginarios().reduce((acc, item) => acc + item.coste, 0);
   }

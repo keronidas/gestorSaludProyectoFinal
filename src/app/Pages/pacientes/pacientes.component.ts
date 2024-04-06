@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { PacientesService } from '../../Services/pacientes.service';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pacientes',
@@ -11,22 +13,27 @@ export class PacientesComponent {
   // private readonly _formbuilder = inject(FormBuilder);
   crearPaciente: boolean = false;
   crearSesion: boolean = false;
+  public patients: any[] = [];
 
-  items: {
-    id: number;
-    name: string;
-    email: string;
-    birthdate: string;
-    city: string;
-    number: string;
-  }[] = [];
 
-  constructor(private servicio: PacientesService, private _formBuilder: FormBuilder) {
-    this.items = this.servicio.getDatosImaginarios();
+
+  constructor(private servicio: PacientesService, private _formBuilder: FormBuilder,  private snackbar: MatSnackBar,private router: Router) {
+    
+  }
+  get currentPatient(): any {
+    const hero = this.formularioCliente.value as any;
+    return hero;
+  }
+
+  ngOnInit(): void {
+    this.servicio.getPatients()
+      .subscribe(patients=> this.patients = patients.sort((a, b) => a.name.localeCompare(b.name)));
+      
   }
 
   formularioCliente = this._formBuilder.nonNullable.group({
     name: ['', Validators.required],
+    profesion: ['', [Validators.required,Validators.minLength(3), Validators.maxLength(50)]],
     email: ['', [Validators.required, Validators.email]],
     birthdate: ['', Validators.required],
     city: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -42,7 +49,7 @@ export class PacientesComponent {
 
   // Método para calcular el número total de páginas
   get totalPages(): number[] {
-    const totalPagesCount = Math.ceil(this.items.length / this.itemsPerPage);
+    const totalPagesCount = Math.ceil(this.patients.length / this.itemsPerPage);
     return Array(totalPagesCount).fill(0).map((x, i) => i + 1);
   }
 
@@ -50,15 +57,19 @@ export class PacientesComponent {
   get currentPageItems(): any[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    return this.items.slice(startIndex, endIndex);
+    return this.patients.slice(startIndex, endIndex);
   }
-
+  showSnackbar( message: string ):void {
+    this.snackbar.open( message, 'done', {
+      duration: 2500,
+    })
+  }
   // Método para cambiar la página actual
   setCurrentPage(page: number): void {
     this.currentPage = page;
   }
   onItemsPerPageChange(value: number): void {
-    console.log('Items per page changed to: ', value);
+    // console.log('Items per page changed to: ', value);
 
     // Lógica para manejar el cambio de número de items por página
     // Puedes recalcular la página actual o ajustar la lógica de paginación según sea necesario
@@ -70,7 +81,15 @@ export class PacientesComponent {
   fnPacienteCreado(): void {
     this.crearPaciente = false;
     if (this.formularioCliente.valid) {
-      this.servicio.addDatosImaginarios(this.formularioCliente.value);
+      // this.servicio.addDatosImaginarios(this.formularioCliente.value);
+
+      this.servicio.addPatient(this.currentPatient)
+      .subscribe(patient=>{
+        this.showSnackbar(`${ patient.name } created!`);
+      })
+      this.formularioCliente.reset();
+ 
+
     }
   }
   fnPacienteCancelado(): void {
