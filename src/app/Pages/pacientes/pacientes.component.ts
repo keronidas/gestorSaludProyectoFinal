@@ -14,6 +14,7 @@ export class PacientesComponent {
   crearPaciente: boolean = false;
   crearSesion: boolean = false;
   public patients: any[] = [];
+  public profesionales: any[] = [];
 
 
 
@@ -38,6 +39,15 @@ export class PacientesComponent {
     birthdate: ['', Validators.required],
     city: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     number: ['', [Validators.required, Validators.pattern(/^[0-9]{7,12}$/)]] // 10 dígitos
+  });
+
+  formularioSesion = this._formBuilder.group({
+    date: ['', Validators.required],
+    hour: ['', Validators.required],
+    duration: ['', Validators.required],
+    cost: ['', Validators.required],
+    patient: ['', Validators.required],
+    status: ['', Validators.required]
   });
 
 
@@ -81,6 +91,7 @@ export class PacientesComponent {
   fnPacienteCreado(): void {
     this.crearPaciente = false;
     if (this.formularioCliente.valid) {
+      
       // this.servicio.addDatosImaginarios(this.formularioCliente.value);
 
       this.servicio.addPatient(this.currentPatient)
@@ -92,8 +103,9 @@ export class PacientesComponent {
 
     }
   }
-  fnPacienteCancelado(): void {
+  fnCancelar(): void {
     this.crearPaciente = false;
+    this.crearSesion = false;
     this.formularioCliente.reset();
   }
   fnCrearSesion(): void {

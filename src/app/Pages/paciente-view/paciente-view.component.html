@@ -4,11 +4,11 @@
             <mat-card class="example-card">
                 <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{paciente.name}}</mat-card-title>
-                    <mat-card-subtitle>{{paciente.profesion}}</mat-card-subtitle>
+                    <mat-card-title>{{patients.name}}</mat-card-title>
+                    <mat-card-subtitle>{{patients.profesion}}</mat-card-subtitle>
                 </mat-card-header>
-                @if(paciente.img){
-                <img mat-card-image [src]="paciente.img">
+                @if(patients.img){
+                <img mat-card-image [src]="patients.img">
                 }
                 @else {
                 <img mat-card-image src="../../../assets/img/pacienteNoImagen.jpg">
@@ -21,10 +21,10 @@
                                 Datos paciente
                             </mat-card-title>
                             <mat-card-subtitle>
-                                <p>Telefono: {{paciente.number}}</p>
-                                <p>Email: {{paciente.email}}</p>
-                                <p>Ciudad: {{paciente.city}}</p>
-                                <p>Fecha de Cumpleaños: {{paciente.birthdate}}</p>
+                                <p>Telefono: {{patients.number}}</p>
+                                <p>Email: {{patients.email}}</p>
+                                <p>Ciudad: {{patients.city}}</p>
+                                <p>Fecha de Cumpleaños: {{patients.birthdate}}</p>
                             </mat-card-subtitle>
 
                         </mat-card-header>

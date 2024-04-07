@@ -12,7 +12,7 @@ import { FacturaService } from '../../Services/factura.service';
 })
 export class PacienteViewComponent implements OnInit {
   id!: string;
-  paciente: any = {};
+  public patients: any = {};
   sesiones: any = [];
   facturas: any = [];
 
@@ -20,7 +20,10 @@ export class PacienteViewComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
-    this.paciente = this.pacienteService.getPatientById((this.id));
+    this.pacienteService.getPatientById(this.id)
+      .subscribe(patients=> this.patients=patients);
+    console.log(this.id);
+    console.log(this.patients)
     this.sesiones = this.sesionService.obtenerSesionesByPacienteId(parseInt(this.id));
     this.facturas = this.facturasService.obtenerFacturasByPacienteId(parseInt(this.id));
   }
