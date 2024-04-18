@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthLayoutComponent } from './Pages/auth-layout/auth-layout.component';
 import { CalendarioComponent } from './Pages/calendario/calendario.component';
 import { CommonModule } from '@angular/common';
-import { ConfiguracionComponent } from './Pages/configuracion/configuracion.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { FacturasComponent } from './Pages/facturas/facturas.component';
 import { FacturaViewComponent } from './Pages/factura-view/factura-view.component';
@@ -44,6 +43,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormatoFechaPipe } from './Pipes/formato-fecha.pipe';
 import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 
 
@@ -58,7 +59,6 @@ import {MatTableModule} from '@angular/material/table';
     LoginPageComponent,
     MaterialComponent,
     FacturasComponent,
-    ConfiguracionComponent,
     CalendarioComponent,
     DashboardComponent,
     PacientesComponent,
@@ -70,7 +70,7 @@ import {MatTableModule} from '@angular/material/table';
     NewSesionComponent,
     FacturaViewComponent,
     PacienteViewComponent,
-    FormatoFechaPipe
+    FormatoFechaPipe,
 
 
 
@@ -105,6 +105,7 @@ import {MatTableModule} from '@angular/material/table';
     MatTabsModule,
     MatExpansionModule,
     MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     provideAnimationsAsync()

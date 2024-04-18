@@ -1,8 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { PacientesService } from '../../Services/pacientes.service';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { PacienteTableData } from '../../Models/pacienteTableData';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-pacientes',
@@ -16,25 +20,44 @@ export class PacientesComponent {
   public patients: any[] = [];
   public profesionales: any[] = [];
 
+  // ANGULAR MATERIAL TABLE
+  displayedColumns: string[] = ['name', 'email', 'birthdate', 'city', 'number',"options"];
+  dataSource!: MatTableDataSource<PacienteTableData>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(private servicio: PacientesService, private _formBuilder: FormBuilder,  private snackbar: MatSnackBar,private router: Router) {
-    
+
+  constructor(private servicio: PacientesService, private _formBuilder: FormBuilder, private snackbar: MatSnackBar, private router: Router) {
+    this.servicio.getPatients()
+      .subscribe(patients => {
+        this.patients = patients.sort((a, b) => a.name.localeCompare(b.name));
+        this.dataSource = new MatTableDataSource(this.patients);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
   }
+
   get currentPatient(): any {
     const hero = this.formularioCliente.value as any;
     return hero;
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   ngOnInit(): void {
-    this.servicio.getPatients()
-      .subscribe(patients=> this.patients = patients.sort((a, b) => a.name.localeCompare(b.name)));
-      
+
   }
 
   formularioCliente = this._formBuilder.nonNullable.group({
     name: ['', Validators.required],
-    profesion: ['', [Validators.required,Validators.minLength(3), Validators.maxLength(50)]],
+    profesion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     email: ['', [Validators.required, Validators.email]],
     birthdate: ['', Validators.required],
     city: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -51,56 +74,37 @@ export class PacientesComponent {
   });
 
 
+  showSnackbar(message: string): void {
+    this.snackbar.open(message, 'done', {
 
-  // Variables para la paginación
-  currentPage = 1;
-  itemsPerPage = 20;
-  itemsPerPageOptions = [5, 10, 25, 50, 100, 1000];
-
-  // Método para calcular el número total de páginas
-  get totalPages(): number[] {
-    const totalPagesCount = Math.ceil(this.patients.length / this.itemsPerPage);
-    return Array(totalPagesCount).fill(0).map((x, i) => i + 1);
+    });
+    const uniqueId = new Date().getTime(); // Genera un ID único basado en la marca de tiempo actual
+    this.router.navigate(['/pacientes'], { queryParams: { refresh: uniqueId } });
   }
 
-  // Método para obtener los elementos de la página actual
-  get currentPageItems(): any[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.patients.slice(startIndex, endIndex);
-  }
-  showSnackbar( message: string ):void {
-    this.snackbar.open( message, 'done', {
-      duration: 2500,
-    })
-  }
-  // Método para cambiar la página actual
-  setCurrentPage(page: number): void {
-    this.currentPage = page;
-  }
-  onItemsPerPageChange(value: number): void {
-    // console.log('Items per page changed to: ', value);
-
-    // Lógica para manejar el cambio de número de items por página
-    // Puedes recalcular la página actual o ajustar la lógica de paginación según sea necesario
-    this.currentPage = 1; // Resetear a la primera página cuando cambie el número de items por página
-  }
   fnCrearPaciente(): void {
     this.crearPaciente = true;
   }
   fnPacienteCreado(): void {
     this.crearPaciente = false;
     if (this.formularioCliente.valid) {
-      
-      // this.servicio.addDatosImaginarios(this.formularioCliente.value);
-
       this.servicio.addPatient(this.currentPatient)
-      .subscribe(patient=>{
-        this.showSnackbar(`${ patient.name } created!`);
-      })
-      this.formularioCliente.reset();
- 
+        .subscribe(patient => {
+          // Mostrar el mensaje de confirmación
+          this.showSnackbar(`Paciente creado!`);
 
+          // Reiniciar el formulario
+          this.formularioCliente.reset();
+
+          // Obtener los pacientes actualizados del servicio
+          this.servicio.getPatients().subscribe(patients => {
+            // Actualizar la lista de pacientes
+            this.patients = patients.sort((a, b) => a.name.localeCompare(b.name));
+
+            // Actualizar la fuente de datos de la tabla
+            this.dataSource.data = this.patients;
+          });
+        });
     }
   }
   fnCancelar(): void {
@@ -114,7 +118,7 @@ export class PacientesComponent {
   fnSesionCreada(): void {
     this.crearSesion = false;
   }
-  guardarPaciente(): void {
 
-  }
+ 
+
 }

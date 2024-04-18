@@ -1,0 +1,9 @@
+export interface MaterialModel {
+    id: string;
+    code: string;
+    name: string;
+    cost: number;
+    supplierName: string;
+    buyDate: Date;
+    quantity: number;
+}

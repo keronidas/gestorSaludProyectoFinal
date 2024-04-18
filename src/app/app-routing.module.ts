@@ -8,7 +8,6 @@ import { ProfesionalesComponent } from './Pages/profesionales/profesionales.comp
 import { SalasTratamientoComponent } from './Pages/salas-tratamiento/salas-tratamiento.component';
 import { MaterialComponent } from './Pages/material/material.component';
 import { FacturasComponent } from './Pages/facturas/facturas.component';
-import { ConfiguracionComponent } from './Pages/configuracion/configuracion.component';
 import { CalendarioComponent } from './Pages/calendario/calendario.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { PacienteViewComponent } from './Pages/paciente-view/paciente-view.component';
@@ -45,14 +44,16 @@ const routes: Routes = [
       { path: 'salas-tratamiento', component: SalasTratamientoComponent, pathMatch: 'full' },
       { path: 'salas-tratamiento/nueva-sala', component: SalaTratamientoViewComponent, pathMatch: 'full' },
       { path: 'salas-tratamiento/ver-sala/:id', component: SalaTratamientoViewComponent, pathMatch: 'full' },
+      // ******************************************
+      //  EN DESARROLLO
       { path: 'calendario', component: CalendarioComponent, pathMatch: 'full' },
+      // ******************************************
       { path: 'material', component: MaterialComponent, pathMatch: 'full' },
       { path: 'material/nuevo-material', component: MaterialViewComponent, pathMatch: 'full' },
       { path: 'material/ver-material/:id', component: MaterialViewComponent, pathMatch: 'full' },
       { path: 'facturas', component: FacturasComponent, pathMatch: 'full' },
       { path: 'facturas/nueva-factura', component: FacturaViewComponent, pathMatch: 'full' },
       { path: 'facturas/ver-factura/:id', component: FacturaViewComponent, pathMatch: 'full' },
-      { path: 'configuracion', component: ConfiguracionComponent, pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' },
 
     ]

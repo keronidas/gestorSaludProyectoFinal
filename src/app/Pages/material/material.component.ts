@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MaterialDto } from '../../Models/MaterialDto';
+import { MaterialService } from '../../Services/material.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-material',
@@ -7,50 +12,43 @@ import { Component } from '@angular/core';
 })
 export class MaterialComponent {
 
-  items: any[] = [];
+  // ANGULAR MATERIAL TABLE
+  displayedColumns: string[] = ['name', 'cost', 'buyDate', 'supplierName', 'quantity', "options"];
+  dataSource!: MatTableDataSource<MaterialDto>;
 
-  constructor() {
-    for (let i = 1; i <= 1000; i++) {
-      this.items.push({
-        id: i,
-        nombre: `Item ${i}`,
-        precio: Math.random() * 1000, // Precio aleatorio entre 0 y 1000
-        fechaCompra: '2023-01-01', // Fecha de compra fija para todos los elementos
-        nombreProveedor: `Proveedor ${i}`,
-        cantidadEnStock: Math.floor(Math.random() * 1000) // Cantidad aleatoria entre 0 y 1000
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  material: MaterialDto[] = [];
+  constructor(private materialService: MaterialService) {
+    this.materialService.getMaterial()
+      .subscribe(material => {
+        this.material = material.sort((a, b) => a.name.localeCompare(b.name));
+        this.dataSource = new MatTableDataSource(this.material);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(this.material);
       });
+
+
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
+  // showSnackbar(message: string): void {
+  //   this.snackbar.open(message, 'done', {
+
+  //   });
+  //   const uniqueId = new Date().getTime(); // Genera un ID único basado en la marca de tiempo actual
+  //   this.router.navigate(['/pacientes'], { queryParams: { refresh: uniqueId } });
+  // }
 
 
-  // Variables para la paginación
-  currentPage = 1;
-  itemsPerPage = 100;
-  itemsPerPageOptions = [5, 10, 25, 50, 100, 1000];
-
-  // Método para calcular el número total de páginas
-  get totalPages(): number[] {
-    const totalPagesCount = Math.ceil(this.items.length / this.itemsPerPage);
-    return Array(totalPagesCount).fill(0).map((x, i) => i + 1);
-  }
-
-  // Método para obtener los elementos de la página actual
-  get currentPageItems(): any[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.items.slice(startIndex, endIndex);
-  }
-
-  // Método para cambiar la página actual
-  setCurrentPage(page: number): void {
-    this.currentPage = page;
-  }
-  onItemsPerPageChange(value: number): void {
-    console.log('Items per page changed to: ', value);
-
-    // Lógica para manejar el cambio de número de items por página
-    // Puedes recalcular la página actual o ajustar la lógica de paginación según sea necesario
-    this.currentPage = 1; // Resetear a la primera página cuando cambie el número de items por página
-  }
 
 }
