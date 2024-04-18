@@ -7,6 +7,7 @@ import { PacienteTableData } from '../../Models/pacienteTableData';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { SesionService } from '../../Services/sesion.service';
 
 @Component({
   selector: 'app-pacientes',
@@ -21,7 +22,7 @@ export class PacientesComponent {
   public profesionales: any[] = [];
 
   // ANGULAR MATERIAL TABLE
-  displayedColumns: string[] = ['name', 'email', 'birthdate', 'city', 'number',"options"];
+  displayedColumns: string[] = ['name', 'email', 'birthdate', 'city', 'number', "options"];
   dataSource!: MatTableDataSource<PacienteTableData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -29,7 +30,7 @@ export class PacientesComponent {
 
 
 
-  constructor(private servicio: PacientesService, private _formBuilder: FormBuilder, private snackbar: MatSnackBar, private router: Router) {
+  constructor(private servicio: PacientesService, private _formBuilder: FormBuilder, private snackbar: MatSnackBar, private router: Router, private sesionService: SesionService) {
     this.servicio.getPatients()
       .subscribe(patients => {
         this.patients = patients.sort((a, b) => a.name.localeCompare(b.name));
@@ -66,11 +67,9 @@ export class PacientesComponent {
 
   formularioSesion = this._formBuilder.group({
     date: ['', Validators.required],
-    hour: ['', Validators.required],
-    duration: ['', Validators.required],
     cost: ['', Validators.required],
     patient: ['', Validators.required],
-    status: ['', Validators.required]
+    profesionales: ['', Validators.required]
   });
 
 
@@ -119,6 +118,6 @@ export class PacientesComponent {
     this.crearSesion = false;
   }
 
- 
+
 
 }

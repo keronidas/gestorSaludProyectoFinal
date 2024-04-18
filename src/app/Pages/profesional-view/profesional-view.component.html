@@ -1,1 +1,61 @@
-<p>profesional-view works!</p>
+<div *ngIf="isLoading">
+    <!-- Mostrar un spinner o un mensaje de carga -->
+    <mat-spinner></mat-spinner>
+</div>
+
+@if(profesional&& !isLoading){
+<div class="container">
+    <div class="row">
+        <div class="col"><mat-card class="profesional-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{profesional.name}}</mat-card-title>
+                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="../../../assets/img/pacienteNoImagen.jpg" alt="Photo">
+                <mat-card-content>
+                    <br>
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>
+                                Datos profesional
+                            </mat-card-title>
+                            <mat-card-subtitle>
+                                <p>Telefono: {{profesional.number}}</p>
+                                <p>Email: {{profesional.email}}</p>
+                                <p>Direccion: {{profesional.adress}}</p>
+                                <p>Fecha de alta: {{profesional.creation_date|fechaYHora}}</p>
+                                <p>Ciudad: {{profesional.city}}</p>
+                                <p>Fecha de Cumpleaños: {{profesional.birthdate |formatoFecha}}</p>
+                                <p>Profesion:
+                                    @for(oficio of profesional.profesion;track profesional.profesion){
+                                    {{oficio.name}}
+                                    }
+                                </p>
+                            </mat-card-subtitle>
+
+                        </mat-card-header>
+
+                    </mat-card>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col"><mat-tab-group>
+                <mat-tab label="Sesiones"> {{sesiones}} </mat-tab>
+                <mat-tab label="Second"> Content 2 </mat-tab>
+                <mat-tab label="Third"> Content 3 </mat-tab>
+            </mat-tab-group></div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col"></div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <button mat-raised-button color="accent" [routerLink]="['/profesionales']">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+}

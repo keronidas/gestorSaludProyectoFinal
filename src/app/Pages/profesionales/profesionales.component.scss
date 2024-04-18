@@ -16,4 +16,11 @@
     display: block; /* Asegura que la imagen esté centrada horizontalmente */
     margin: 0 auto; /* Centra la imagen horizontalmente dentro del contenedor */
   }
-  
+  mat-card-subtitle{
+    padding-bottom: 10px;
+  }
+
+  a{
+    text-decoration: none;
+    color: black;
+    }

@@ -18,59 +18,39 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 mb-4">
-            <div class="card">
-                <img src="../../../assets/img/persona1.jpeg" class="card-img-top" alt="Imagen del Trabajador 1">
-                <div class="card-body">
-                    <h5 class="card-title">Nombre del Trabajador 1</h5>
-                    <p class="card-text">Cargo: Desarrollador Web</p>
-                    <p class="card-text">Salario: $2500</p>
-                </div>
-            </div>
-        </div>
+        @for (profesional of profesionals; track profesional) {
+        <div class="col-md-3 mb-4">
+            <mat-card class="card">
+                <a [routerLink]="['/profesionales/ver-profesional/', profesional.id]">
 
-        <div class="col-md-2 mb-4">
-            <div class="card">
-                <img src="../../../assets/img/persona2.jpeg" class="card-img-top" alt="Imagen del Trabajador 2">
-                <div class="card-body">
-                    <h5 class="card-title">Nombre del Trabajador 2</h5>
-                    <p class="card-text">Cargo: Diseñador Gráfico</p>
-                    <p class="card-text">Salario: $2200</p>
-                </div>
-            </div>
-        </div>
+                    <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>{{profesional.name}}</mat-card-title>
+                    </mat-card-header>
+                    <img src="../../../assets/img/persona1.jpeg" class="card-img-top" alt="Imagen del Trabajador 1">
+                    <mat-card-content>
+                        <br>
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>
+                                    Oficios
+                                </mat-card-title>
+                                <mat-card-subtitle>
+                                    @for(oficio of profesional.profesion; track oficio){
+                                    <p class="card-text">{{oficio.name }}</p>
+                                    }
+                                </mat-card-subtitle>
+                            </mat-card-header>
 
-        <div class="col-md-2 mb-4">
-            <div class="card">
-                <img src="../../../assets/img/persona3.jpeg" class="card-img-top" alt="Imagen del Trabajador 3">
-                <div class="card-body">
-                    <h5 class="card-title">Nombre del Trabajador 3</h5>
-                    <p class="card-text">Cargo: Gerente de Proyecto</p>
-                    <p class="card-text">Salario: $3000</p>
-                </div>
-            </div>
-        </div>
+                        </mat-card>
 
-        <div class="col-md-2 mb-4">
-            <div class="card">
-                <img src="../../../assets/img/persona4.jpeg" class="card-img-top" alt="Imagen del Trabajador 4">
-                <div class="card-body">
-                    <h5 class="card-title">Nombre del Trabajador 4</h5>
-                    <p class="card-text">Cargo: Analista de Datos</p>
-                    <p class="card-text">Salario: $2800</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 mb-4">
-            <div class="card">
-                <img src="../../../assets/img/persona5.jpeg" class="card-img-top" alt="Imagen del Trabajador 4">
-                <div class="card-body">
-                    <h5 class="card-title">Nombre del Trabajador 4</h5>
-                    <p class="card-text">Cargo: Analista de Datos</p>
-                    <p class="card-text">Salario: $2800</p>
-                </div>
-            </div>
-        </div>
+                    </mat-card-content>
+
+
+                </a>
+            </mat-card>
+        </div>}
+
 
     </div>
 </div>

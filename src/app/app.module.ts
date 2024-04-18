@@ -42,38 +42,38 @@ import { PacienteViewComponent } from './Pages/paciente-view/paciente-view.compo
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormatoFechaPipe } from './Pipes/formato-fecha.pipe';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
-
-
-
+import { MonedaPipe } from './Pipes/moneda.pipe';
+import { ProfesionalesComponent } from './Pages/profesionales/profesionales.component';
+import { ProfesionalViewComponent } from './Pages/profesional-view/profesional-view.component';
+import { FechaYHoraPipe } from './Pipes/fecha-yhora.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent,
     AuthLayoutComponent,
-    LoginPageComponent,
-    MaterialComponent,
-    FacturasComponent,
     CalendarioComponent,
     DashboardComponent,
-    PacientesComponent,
-    NewPacienteComponent,
+    FacturasComponent,
+    FacturaViewComponent,
+    FormatoFechaPipe,
+    LayoutComponent,
+    LoginPageComponent,
+    MaterialComponent,
+    MonedaPipe,
+    NewFacturaComponent,
     NewMaterialComponent,
+    NewPacienteComponent,
     NewProfesionalComponent,
     NewSalaTratamientoComponent,
-    NewFacturaComponent,
     NewSesionComponent,
-    FacturaViewComponent,
+    PacientesComponent,
     PacienteViewComponent,
-    FormatoFechaPipe,
-
-
-
+    ProfesionalesComponent,
+    ProfesionalViewComponent,
+    FechaYHoraPipe
   ],
   imports: [
     BrowserModule,
@@ -108,7 +108,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    MonedaPipe
   ],
   bootstrap: [AppComponent]
 })

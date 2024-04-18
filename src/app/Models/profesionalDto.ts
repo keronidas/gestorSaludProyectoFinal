@@ -1,6 +1,7 @@
 import { OficioModel } from "./oficioModel";
 
 export interface ProfesionalDto {
+    creation_date: Date;
     id: String;
     name: String;
     email: String;
@@ -8,7 +9,7 @@ export interface ProfesionalDto {
     city: String;
     adress: String;
     number: String;
-    salary: Number;
+    salary: number;
     img: String;
     profesion: OficioModel[];
 }

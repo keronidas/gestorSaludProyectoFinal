@@ -35,7 +35,7 @@
         <!-- Email Column -->
         <ng-container matColumnDef="cost">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
-            <td mat-cell *matCellDef="let row"> {{row.cost| number:'1.2-2' }}<span> € </span></td>
+            <td mat-cell *matCellDef="let row"> {{row.cost| aEuros }}</td>
         </ng-container>
 
         <!-- Birthdate Column -->
