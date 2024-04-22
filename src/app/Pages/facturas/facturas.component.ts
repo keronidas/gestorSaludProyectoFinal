@@ -1,4 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { PacienteTableData } from '../../Models/pacienteTableData';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { FacturaService } from '../../Services/factura.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-facturas',
@@ -6,54 +14,96 @@ import { Component } from '@angular/core';
   styleUrl: './facturas.component.scss'
 })
 export class FacturasComponent {
-  items: any[] = [];
+  crearFactura: boolean = false;
+  public facturas: any[] = [];
 
-  constructor() {
-    for (let i = 1; i <= 1000; i++) {
-      this.items.push({
-        id: i,
-        nombre: `Item ${i}`,
-        codigoVerificacion: Math.random().toString(36).substring(7), // Código aleatorio de 7 caracteres
-        fechaCreacion: new Date().toDateString(), // Fecha de creación actual,
-        fechaFacturacion: new Date().toDateString(), // Fecha de facturación actual
-        estado: Math.random() > 0.05 ? 'Pagado' : 'Pendiente', // Estado aleatorio entre 'Pagado' y 'Pendiente'
-        descuento_general: (Math.random() * 30).toFixed(2), // Descuento aleatorio entre 0 y 100
-        importe: (Math.random() * 1000).toFixed(2), // Importe aleatorio entre 0 y 1000
+  // ANGULAR MATERIAL TABLE
+  displayedColumns: string[] = ['id', 'CSV', 'dateCreation', 'state', "discount", "cost", "options"];
+  dataSource!: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+
+
+  constructor(private servicio: FacturaService, private _formBuilder: FormBuilder, private snackbar: MatSnackBar, private router: Router) {
+    this.servicio.getFactura()
+      .subscribe(facturas => {
+        this.facturas = facturas.sort((a, b) => a.id.localeCompare(b.id));
+        this.dataSource = new MatTableDataSource(this.facturas);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
+  }
+
+  get currentFactura(): any {
+    const hero = this.formularioFactura.value as any;
+    return hero;
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
+  ngOnInit(): void {
 
-
-  // Variables para la paginación
-  currentPage = 1;
-  itemsPerPage = 100;
-  itemsPerPageOptions = [5, 10, 25, 50, 100, 1000];
-
-  // Método para calcular el número total de páginas
-  get totalPages(): number[] {
-    const totalPagesCount = Math.ceil(this.items.length / this.itemsPerPage);
-    return Array(totalPagesCount).fill(0).map((x, i) => i + 1);
   }
 
-  // Método para obtener los elementos de la página actual
-  get currentPageItems(): any[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.items.slice(startIndex, endIndex);
+  formularioFactura = this._formBuilder.nonNullable.group({
+    name: ['', Validators.required],
+    profesion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+    email: ['', [Validators.required, Validators.email]],
+    birthdate: ['', Validators.required],
+    city: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+    number: ['', [Validators.required, Validators.pattern(/^[0-9]{7,12}$/)]] // 10 dígitos
+  });
+
+
+
+
+  showSnackbar(message: string): void {
+    this.snackbar.open(message, 'done', {
+
+    });
+    const uniqueId = new Date().getTime(); // Genera un ID único basado en la marca de tiempo actual
+    this.router.navigate(['/facturas'], { queryParams: { refresh: uniqueId } });
   }
 
-  // Método para cambiar la página actual
-  setCurrentPage(page: number): void {
-    this.currentPage = page;
+  fnCrearFacturas(): void {
+    this.crearFactura = true;
   }
-  onItemsPerPageChange(value: number): void {
-    console.log('Items per page changed to: ', value);
+  fnFacturasCreado(): void {
+    this.crearFactura = false;
+    if (this.formularioFactura.valid) {
+      this.servicio.addFactura(this.currentFactura)
+        .subscribe(patient => {
+          // Mostrar el mensaje de confirmación
+          this.showSnackbar(`Factura creado!`);
 
-    // Lógica para manejar el cambio de número de items por página
-    // Puedes recalcular la página actual o ajustar la lógica de paginación según sea necesario
-    this.currentPage = 1; // Resetear a la primera página cuando cambie el número de items por página
+          // Reiniciar el formulario
+          this.formularioFactura.reset();
+
+          // Obtener los pacientes actualizados del servicio
+          this.servicio.getFactura().subscribe(facturas => {
+            // Actualizar la lista de pacientes
+            this.facturas = facturas.sort((a, b) => a.id.localeCompare(b.id));
+
+            // Actualizar la fuente de datos de la tabla
+            this.dataSource.data = this.facturas;
+          });
+        });
+    }
   }
+  fnCancelar(): void {
+    this.crearFactura = false;
+    this.formularioFactura.reset();
+  }
+
+
+
+
 
 }
-
-

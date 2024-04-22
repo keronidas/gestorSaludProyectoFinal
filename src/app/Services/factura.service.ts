@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { PacientesService } from './pacientes.service';
-import { SesionService } from './sesion.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 

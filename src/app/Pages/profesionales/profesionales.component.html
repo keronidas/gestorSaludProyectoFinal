@@ -10,52 +10,163 @@
             <h1>Profesionales</h1>
         </div>
         <div class="col">
-            <button class="mi-btn rojo-marron mb-2 container-fluid">Agregar profesional</button>
-            <input type="text" class="form-control mb-2" placeholder="Buscar profesional">
+            <button class="mi-btn rojo-marron mb-2 container-fluid" (click)="fnCrearProfesional()">Agregar
+                profesional</button>
         </div>
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row">
-        @for (profesional of profesionals; track profesional) {
-        <div class="col-md-3 mb-4">
-            <mat-card class="card">
-                <a [routerLink]="['/profesionales/ver-profesional/', profesional.id]">
+<mat-form-field>
+    <mat-label>Buscador</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Por ejemplo: 'Pedro'" #input>
+</mat-form-field>
 
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>{{profesional.name}}</mat-card-title>
-                    </mat-card-header>
-                    <img src="../../../assets/img/persona1.jpeg" class="card-img-top" alt="Imagen del Trabajador 1">
-                    <mat-card-content>
-                        <br>
-                        <mat-card>
-                            <mat-card-header>
-                                <mat-card-title>
-                                    Oficios
-                                </mat-card-title>
-                                <mat-card-subtitle>
-                                    @for(oficio of profesional.profesion; track oficio){
-                                    <p class="card-text">{{oficio.name }}</p>
-                                    }
-                                </mat-card-subtitle>
-                            </mat-card-header>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
 
-                        </mat-card>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
 
-                    </mat-card-content>
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+        </ng-container>
+
+        <!-- Birthdate Column -->
+        <ng-container matColumnDef="profesion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Profesion </th>
+            <td mat-cell *matCellDef="let row"> {{row.profesion}} </td>
+        </ng-container>
+
+        <!-- City Column -->
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciudad </th>
+            <td mat-cell *matCellDef="let row"> {{row.city}} </td>
+        </ng-container>
+
+        <!-- Number Column -->
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Numero </th>
+            <td mat-cell *matCellDef="let row"> {{row.number}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+            <td mat-cell *matCellDef="let row"> <a class="enlace-lapiz"
+                    [routerLink]="['/profesionales/ver-profesional/', row.id]"><mat-icon matListItemIcon>person</mat-icon></a>
+            </td>
+        </ng-container>
 
 
-                </a>
-            </mat-card>
-        </div>}
 
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    </div>
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No hay datos con "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
 
-<!-- <td><a  class="enlace-lapiz" [routerLink]="['/facturas/editar-factura/', item.id]"><mat-icon
-    matListItemIcon>edit</mat-icon></a>
-<button class="btn-basura"><mat-icon matListItemIcon>delete</mat-icon></button>
-</td> -->
+
+@if(crearProfesional){
+<div class="fondo-formulario">
+    <div class="row formulario-oculto">
+        <form [formGroup]="formularioProfesional" class="form">
+            <div class="col-12">
+                <h2>Agregar Profesional</h2>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Nombre </mat-label>
+                    <input matInput type="text" formControlName="name" />
+                    @if(formularioProfesional.controls.name.hasError('required')){
+                    <mat-error>Ingrese su nombre</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Profesion </mat-label>
+                    <input matInput type="text" formControlName="profesion" />
+                    @if(formularioProfesional.controls.profesion.hasError('required')){
+                    <mat-error>Ingrese su profesion</mat-error>
+                    }
+                    @if(formularioProfesional.controls.profesion.hasError('minlength')){
+                    <mat-error>Ingrese un minimo de 3 caracteres</mat-error>
+                    }
+                    @if(formularioProfesional.controls.profesion.hasError('maxlength')){
+                    <mat-error>Ingrese un maximo de 50 caracteres</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Email </mat-label>
+                    <input matInput type="text" formControlName="email" />
+                    @if(formularioProfesional.controls.email.hasError('required')){
+                    <mat-error>Ingrese su email</mat-error>
+                    }
+                    @if(formularioProfesional.controls.email.hasError('email')){
+                    <mat-error>Ingrese un formato correcto</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Fecha de Nacimiento </mat-label>
+                    <input matInput type="date" formControlName="birthdate" />
+                    @if(formularioProfesional.controls.birthdate.hasError('required')){
+                    <mat-error>Ingrese su fecha de nacimiento</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Ciudad </mat-label>
+                    <input matInput type="text" formControlName="city" />
+                    @if(formularioProfesional.controls.city.hasError('required')){
+                    <mat-error>Ingrese su ciudad</mat-error>
+                    }
+                    @if(formularioProfesional.controls.city.hasError('minlength')){
+                    <mat-error>Ingrese un minimo de 3 caracteres</mat-error>
+                    }
+                    @if(formularioProfesional.controls.city.hasError('maxlength')){
+                    <mat-error>Ingrese un maximo de 50 caracteres</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label> Numero contacto </mat-label>
+                    <input matInput type="text" formControlName="number" />
+                    @if(formularioProfesional.controls.number.hasError('required')){
+                    <mat-error>Ingrese su numero de telefono</mat-error>
+                    }
+                    @if(formularioProfesional.controls.number.hasError('pattern')){
+                    <mat-error>Ingrese un numero de telefono valido</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="row">
+
+                <div class="col-6">
+                    <button mat-raised-button (click)="fnProfesionalCreado()" color="primary"
+                        [disabled]="formularioProfesional.invalid">Crear</button>
+                </div>
+                <div class="col-6">
+                    <button mat-raised-button (click)="fnCancelar()" color="accent">Cancelar</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+}

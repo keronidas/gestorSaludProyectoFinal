@@ -6,7 +6,7 @@
 @if(profesional&& !isLoading){
 <div class="container">
     <div class="row">
-        <div class="col"><mat-card class="profesional-card">
+        <div class="col centrar"><mat-card class="profesional-card">
                 <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
                     <mat-card-title>{{profesional.name}}</mat-card-title>
@@ -27,11 +27,7 @@
                                 <p>Fecha de alta: {{profesional.creation_date|fechaYHora}}</p>
                                 <p>Ciudad: {{profesional.city}}</p>
                                 <p>Fecha de Cumpleaños: {{profesional.birthdate |formatoFecha}}</p>
-                                <p>Profesion:
-                                    @for(oficio of profesional.profesion;track profesional.profesion){
-                                    {{oficio.name}}
-                                    }
-                                </p>
+
                             </mat-card-subtitle>
 
                         </mat-card-header>
@@ -42,19 +38,17 @@
         </div>
         <div class="col"><mat-tab-group>
                 <mat-tab label="Sesiones"> {{sesiones}} </mat-tab>
-                <mat-tab label="Second"> Content 2 </mat-tab>
-                <mat-tab label="Third"> Content 3 </mat-tab>
+                <mat-tab label="Informacion"> {{profesional.name}} vive en {{profesional.adress}},fue dado de alta en la
+                    empresa el {{profesional.creation_date|formatoFecha}} y su Cumpleaños es el
+                    {{profesional.birthdate}} </mat-tab>
+
             </mat-tab-group></div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col"></div>
-        <div class="col">
-            <div class="row">
-                <div class="col">
-                    <button mat-raised-button color="accent" [routerLink]="['/profesionales']">Volver</button>
-                </div>
-            </div>
+    <div class="row  ">
+        <div class="col centrar">
+            <button mat-raised-button color="accent" [routerLink]="['/profesionales']">Volver</button>
         </div>
+
     </div>
 </div>
 

@@ -1,4 +1,3 @@
-import { OficioModel } from "./oficioModel";
 
 export interface ProfesionalDto {
     creation_date: Date;
@@ -11,5 +10,5 @@ export interface ProfesionalDto {
     number: String;
     salary: number;
     img: String;
-    profesion: OficioModel[];
+    profesion: String;
 }

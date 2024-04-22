@@ -48,6 +48,7 @@ import { MonedaPipe } from './Pipes/moneda.pipe';
 import { ProfesionalesComponent } from './Pages/profesionales/profesionales.component';
 import { ProfesionalViewComponent } from './Pages/profesional-view/profesional-view.component';
 import { FechaYHoraPipe } from './Pipes/fecha-yhora.pipe';
+import { SalasTratamientoComponent } from './Pages/salas-tratamiento/salas-tratamiento.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { FechaYHoraPipe } from './Pipes/fecha-yhora.pipe';
     PacienteViewComponent,
     ProfesionalesComponent,
     ProfesionalViewComponent,
-    FechaYHoraPipe
+    FechaYHoraPipe,
+    SalasTratamientoComponent
   ],
   imports: [
     BrowserModule,

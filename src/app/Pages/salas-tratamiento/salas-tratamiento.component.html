@@ -10,62 +10,102 @@
       <h1>Salas de tratamiento</h1>
     </div>
     <div class="col">
-      <button class="mi-btn rojo-marron mb-2 container-fluid">Agregar sala de tratamiento</button>
-      <input type="text" class="form-control mb-2" placeholder="Buscar sala de tratamiento">
+      <button class="mi-btn rojo-marron mb-2 container-fluid" (click)="fnCrearSalas()">Agregar sala de
+        tratamiento</button>
     </div>
   </div>
 </div>
 
 <div class="container-fluid">
   <div class="row">
+    <mat-form-field>
+      <mat-label>Buscador</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Por ejemplo: 'Pedro'" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+          <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+        </ng-container>
 
 
-    <div class="col-md-3 mb-4">
-      <div class="card">
-        <img src="../../../assets/img/salaTratamiento1.jpg" class="card-img-top" alt="Sala de Tratamiento 1">
-        <div class="card-body">
-          <h5 class="card-title">Sala de Tratamiento 1</h5>
-          <p class="card-text">Tipo: Quirófano</p>
-          <p class="card-text">Capacidad: 10 personas</p>
-        </div>
-      </div>
+        <ng-container matColumnDef="options">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+          <td mat-cell *matCellDef="let row"> <a class="enlace-lapiz"><mat-icon matListItemIcon>edit</mat-icon></a>
+            <button class="btn-basura" onclick="delete[(row.id)]"><mat-icon matListItemIcon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay datos con "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
 
-    <div class="col-md-3 mb-4">
-      <div class="card">
-        <img src="../../../assets/img/salaTratamiento2.jpg" class="card-img-top" alt="Sala de Tratamiento 2">
-        <div class="card-body">
-          <h5 class="card-title">Sala de Tratamiento 2</h5>
-          <p class="card-text">Tipo: Sala de Espera</p>
-          <p class="card-text">Capacidad: 20 personas</p>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-md-3 mb-4">
-      <div class="card">
-        <img src="../../../assets/img/salaTratamiento3.jpg" class="card-img-top" alt="Sala de Tratamiento 3">
-        <div class="card-body">
-          <h5 class="card-title">Sala de Tratamiento 3</h5>
-          <p class="card-text">Tipo: Laboratorio</p>
-          <p class="card-text">Capacidad: 8 personas</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 mb-4">
-      <div class="card">
-        <img src="../../../assets/img/salaTratamiento4.jpg" class="card-img-top" alt="Sala de Tratamiento 4">
-        <div class="card-body">
-          <h5 class="card-title">Sala de Tratamiento 4</h5>
-          <p class="card-text">Tipo: Consultorio</p>
-          <p class="card-text">Capacidad: 5 personas</p>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- <td><a  class="enlace-lapiz" [routerLink]="['/facturas/editar-factura/', item.id]"><mat-icon
-  matListItemIcon>edit</mat-icon></a>
-<button class="btn-basura"><mat-icon matListItemIcon>delete</mat-icon></button>
-</td> -->
+
+@if(crearSala){
+<div class="fondo-formulario">
+  <div class="row formulario-oculto">
+    <form [formGroup]="formularioSala" class="form">
+      <div class="col-12">
+        <h2>Agregar Salas de tratamiento</h2>
+      </div>
+      <div class="col-12">
+        <mat-form-field appearance="outline">
+          <mat-label> Nombre </mat-label>
+          <input matInput type="text" formControlName="name" />
+          @if(formularioSala.controls.name.hasError('required')){
+          <mat-error>Ingrese su nombre</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label> Descripcion </mat-label>
+          <input matInput type="text" formControlName="description" />
+          @if(formularioSala.controls.name.hasError('required')){
+          <mat-error>Ingrese su nombre</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+
+        <div class="col-6">
+          <button mat-raised-button (click)="fnProfesionalCreado()" color="primary"
+            [disabled]="formularioSala.invalid">Crear</button>
+        </div>
+        <div class="col-6">
+          <button mat-raised-button (click)="fnCancelar()" color="accent">Cancelar</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+}
