@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { PacientesService } from '../../Services/pacientes.service';
-import { SesionService } from '../../Services/sesion.service';
 
 @Component({
   selector: 'app-dashboard',

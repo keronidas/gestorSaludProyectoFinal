@@ -118,6 +118,6 @@ export class PacientesComponent {
     this.crearSesion = false;
   }
 
-
+  datos: any[] = [1, 2, 3, 4, 5, 6];
 
 }

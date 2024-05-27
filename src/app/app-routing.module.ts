@@ -16,6 +16,7 @@ import { ProfesionalViewComponent } from './Pages/profesional-view/profesional-v
 import { SalaTratamientoViewComponent } from './Pages/sala-tratamiento-view/sala-tratamiento-view.component';
 import { MaterialViewComponent } from './Pages/material-view/material-view.component';
 import { FacturaViewComponent } from './Pages/factura-view/factura-view.component';
+import { AdminComponent } from './Pages/admin/admin.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
       // ******************************************
       //  EN DESARROLLO
       { path: 'calendario', component: CalendarioComponent, pathMatch: 'full' },
+      { path: 'administracion', component: AdminComponent, pathMatch: 'full' },
       // ******************************************
       { path: 'material', component: MaterialComponent, pathMatch: 'full' },
       { path: 'material/nuevo-material', component: MaterialViewComponent, pathMatch: 'full' },
