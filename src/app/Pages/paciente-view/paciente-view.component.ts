@@ -12,7 +12,39 @@ import { SesionService } from '../../Services/sesion.service';
 export class PacienteViewComponent implements OnInit {
   id!: string;
   patients: any = {};
-  sesiones: any = [];
+  sesiones: any = [
+  
+  ];
+  facturas: any = [
+    {
+      precio: 150.75,
+      pagada: true,
+      fechaEmision: '2024-01-01',
+      fechaPago: '2024-01-10'
+    },
+    {
+      precio: 200.00,
+      pagada: false,
+      fechaEmision: '2024-02-15'
+    },
+    {
+      precio: 99.99,
+      pagada: true,
+      fechaEmision: '2024-03-05',
+      fechaPago: '2024-03-20'
+    },
+    {
+      precio: 250.50,
+      pagada: false,
+      fechaEmision: '2024-04-10'
+    },
+    {
+      precio: 175.00,
+      pagada: true,
+      fechaEmision: '2024-05-25',
+      fechaPago: '2024-06-05'
+    }
+  ];
 
   constructor(private route: ActivatedRoute, private pacienteService: PacientesService, private sesionService: SesionService) { }
 

@@ -1,51 +1,40 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Pacientes atendidos</h5>
-                    <!-- <p class="card-text">{{pacientesTratados}}</p> -->
-                </div>
-            </div>
+<div class="content">
+    <div id="overview" class="card">
+        <h3>Resumen</h3>
+        <p>Bienvenido al dashboard de la clínica. Aquí puedes ver una visión general de las estadísticas clave y la
+            información.</p>
+    </div>
+    <div class="stats">
+        <div class="card">
+            <i class="fas fa-user-injured"></i>
+            <h3>Pacientes Totales</h3>
+            <p>1,234</p>
         </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Numero de sesiones realizadas</h5>
-                  
-                </div>
-            </div>
+        <div class="card">
+            <i class="fas fa-calendar-check"></i>
+            <h3>Citas Hoy</h3>
+            <p>56</p>
         </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-            
-                </div>
-            </div>
+        <div class="card">
+            <i class="fas fa-file-alt"></i>
+            <h3>Informes Generados</h3>
+            <p>123</p>
         </div>
     </div>
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Ventas del Mes Actual</h5>
-                    <canvas id="ventasChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Top 5 Productos más Vendidos</h5>
-                    <ol>
-                        <li>Producto A - 150 unidades</li>
-                        <li>Producto B - 120 unidades</li>
-                        <li>Producto C - 100 unidades</li>
-                        <li>Producto D - 90 unidades</li>
-                        <li>Producto E - 80 unidades</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+    <div id="patients" class="card">
+        <h3>Pacientes</h3>
+        <p>Listado de pacientes y sus detalles...</p>
+    </div>
+    <div id="appointments" class="card">
+        <h3>Citas</h3>
+        <p>Listado de citas programadas...</p>
+    </div>
+    <div id="reports" class="card">
+        <h3>Informes</h3>
+        <p>Generar y visualizar informes...</p>
+    </div>
+    <div id="settings" class="card">
+        <h3>Configuración</h3>
+        <p>Ajustes del sistema...</p>
     </div>
 </div>

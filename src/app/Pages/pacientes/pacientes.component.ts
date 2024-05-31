@@ -117,6 +117,16 @@ export class PacientesComponent {
   fnSesionCreada(): void {
     this.crearSesion = false;
   }
+  deletePatient(id: string): void {
+    this.servicio.deltePatientById(id)
+      .subscribe(() => {
+        this.showSnackbar(`Paciente eliminado!`);
+        this.servicio.getPatients().subscribe(patients => {
+          this.patients = patients.sort((a, b) => a.name.localeCompare(b.name));
+          this.dataSource.data = this.patients;
+        });
+      });
+  }
 
   datos: any[] = [1, 2, 3, 4, 5, 6];
 

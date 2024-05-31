@@ -27,5 +27,9 @@ export class PacientesService {
     const url = `${this.apiUrl}/pacientes/${id}`;
     return this.http.get<any>(url);
   }
+  deltePatientById(id: String): Observable<any> {
+    const url = `${this.apiUrl}/pacientes/${id}`;
+    return this.http.delete<any>(url);
+  }
   
 }

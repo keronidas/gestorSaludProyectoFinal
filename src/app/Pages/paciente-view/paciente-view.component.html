@@ -3,7 +3,7 @@
         <div class="col">
             <mat-card class="example-card">
                 <mat-card-header>
-                    
+
                     <mat-card-title>{{patients.name}}</mat-card-title>
                     <mat-card-subtitle>{{patients.profesion}}</mat-card-subtitle>
                 </mat-card-header>
@@ -38,23 +38,102 @@
         <div class="col">
             <div class="row">
                 <mat-tab-group>
-                    <mat-tab label="Datos">
-                       En creacion
+                    <mat-tab label="Historias clinicas">
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                background-color: #f0f0f0;
+                                margin: 0;
+                                padding: 0;
+                            }
+
+                            .container {
+                                width: 80%;
+                                margin: 50px auto;
+                                background-color: #fff;
+                                padding: 20px;
+                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                            }
+
+                            h2 {
+                                text-align: center;
+                                color: #333;
+                            }
+
+                            .historia {
+                                margin-bottom: 30px;
+                                padding: 20px;
+                                border: 1px solid #ddd;
+                                border-radius: 5px;
+                                background-color: #f9f9f9;
+                            }
+
+                            .historia h3 {
+                                margin-top: 0;
+                                color: #444;
+                            }
+
+                            .historia p {
+                                margin: 5px 0;
+                                color: #555;
+                            }
+                        </style>
+                        <div class="historia">
+                            <h3>Dolor cervical</h3>
+                            <p><strong>Motivo:</strong> Dolor constante en la región del cuello, empeora con el
+                                movimiento</p>
+                            <p><strong>Diagnóstico:</strong> Cervicalgia</p>
+                            <p><strong>Tratamiento:</strong> Analgésicos, fisioterapia, corrección postural</p>
+                        </div>
+
+                        <div class="historia">
+                            <h3>Dolor lumbar</h3>
+                            <p><strong>Motivo:</strong> Dolor en la parte baja de la espalda, dificultad para agacharse
+                            </p>
+                            <p><strong>Diagnóstico:</strong> Lumbalgia</p>
+                            <p><strong>Tratamiento:</strong> Antiinflamatorios, ejercicio físico, reposo relativo</p>
+                        </div>
+
+                        <div class="historia">
+                            <h3>Migraña</h3>
+                            <p><strong>Motivo:</strong> Dolores de cabeza intensos, náuseas, sensibilidad a la luz</p>
+                            <p><strong>Diagnóstico:</strong> Migraña crónica</p>
+                            <p><strong>Tratamiento:</strong> Triptanes, antieméticos, evitar desencadenantes</p>
+                        </div>
+
+                        <div class="historia">
+                            <h3>Dolor torácico</h3>
+                            <p><strong>Motivo:</strong> Dolor en el pecho, especialmente durante el esfuerzo físico</p>
+                            <p><strong>Diagnóstico:</strong> Angina de pecho</p>
+                            <p><strong>Tratamiento:</strong> Nitratos, betabloqueadores, modificación del estilo de vida
+                            </p>
+                        </div>
+
+                        <div class="historia">
+                            <h3>Artritis reumatoide</h3>
+                            <p><strong>Motivo:</strong> Dolor e hinchazón en las articulaciones, rigidez matutina</p>
+                            <p><strong>Diagnóstico:</strong> Artritis reumatoide</p>
+                            <p><strong>Tratamiento:</strong> AINEs, DMARDs, terapia biológica</p>
+                        </div>
 
                     </mat-tab>
-                    <mat-tab label="Sesiones">
+                    <mat-tab label="Facturas">
                         <mat-accordion>
-                            @for(sesion of sesiones;track sesiones){
+                            @for(factura of facturas;track facturas){
                             <mat-expansion-panel hideToggle>
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
-                                        {{sesion.motivo}}
+                                        {{factura.fechaEmision}}
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                        {{sesion.diagnostico}} - {{sesion.fecha|formatoFecha}}
+                                        {{factura.precio}} Euros
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <p>{{sesion.tratamiento}}</p>
+                                @if(factura.fechaPago){
+                                <p>Fecha de pago --- {{factura.fechaPago}}</p>}
+                                @if(!factura.fechaPago){
+                                <p><strong>NO PAGADA</strong></p>}
+
                             </mat-expansion-panel>
                             }
                         </mat-accordion>
